@@ -1,5 +1,4 @@
 ﻿using SpainFootball.DAL;
-using SpainFootball.DAL;
 
 namespace SpainFootball
 {

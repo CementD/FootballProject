@@ -115,7 +115,7 @@ namespace SpainFootball
                 Team2Id = team2Id,
                 Team1Goals = team1Goals,
                 Team2Goals = team2Goals,
-                Date = matchDate, // Сохраняем введенную дату
+                Date = matchDate,
                 ScoringPlayers = new List<ScoringPlayer>()
             };
 
@@ -329,7 +329,7 @@ namespace SpainFootball
                 return;
             }
 
-            var players = matchService.GetScoringPlayersByDate(date) ?? new List<ScoringPlayer>(); // Если null, создаём пустой список
+            var players = matchService.GetScoringPlayersByDate(date);
 
             if (players.Count == 0)
             {
