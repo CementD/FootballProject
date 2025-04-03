@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SpainFootball.DAL;
 
@@ -11,9 +12,11 @@ using SpainFootball.DAL;
 namespace SpainFootball.DAL.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250402195208_ThreeNewClasses")]
+    partial class ThreeNewClasses
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -84,7 +87,7 @@ namespace SpainFootball.DAL.Migrations
                     b.ToTable("Players");
                 });
 
-            modelBuilder.Entity("SpainFootball.DAL.Enteties.ScoringPlayer", b =>
+            modelBuilder.Entity("SpainFootball.DAL.Enteties.PlayersScored", b =>
                 {
                     b.Property<int>("MatchId")
                         .HasColumnType("int");
@@ -96,7 +99,7 @@ namespace SpainFootball.DAL.Migrations
 
                     b.HasIndex("PlayerId");
 
-                    b.ToTable("ScoringPlayers");
+                    b.ToTable("MatchPlayers");
                 });
 
             modelBuilder.Entity("SpainFootball.DAL.Team", b =>
@@ -157,21 +160,21 @@ namespace SpainFootball.DAL.Migrations
                     b.HasOne("SpainFootball.DAL.Team", "Team")
                         .WithMany("Players")
                         .HasForeignKey("TeamId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("Team");
                 });
 
-            modelBuilder.Entity("SpainFootball.DAL.Enteties.ScoringPlayer", b =>
+            modelBuilder.Entity("SpainFootball.DAL.Enteties.PlayersScored", b =>
                 {
                     b.HasOne("SpainFootball.DAL.Enteties.Match", "Match")
-                        .WithMany("ScoringPlayers")
+                        .WithMany("MatchPlayers")
                         .HasForeignKey("MatchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("SpainFootball.DAL.Enteties.Player", "Player")
-                        .WithMany("ScoringPlayers")
+                        .WithMany("MatchPlayers")
                         .HasForeignKey("PlayerId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -183,12 +186,12 @@ namespace SpainFootball.DAL.Migrations
 
             modelBuilder.Entity("SpainFootball.DAL.Enteties.Match", b =>
                 {
-                    b.Navigation("ScoringPlayers");
+                    b.Navigation("MatchPlayers");
                 });
 
             modelBuilder.Entity("SpainFootball.DAL.Enteties.Player", b =>
                 {
-                    b.Navigation("ScoringPlayers");
+                    b.Navigation("MatchPlayers");
                 });
 
             modelBuilder.Entity("SpainFootball.DAL.Team", b =>

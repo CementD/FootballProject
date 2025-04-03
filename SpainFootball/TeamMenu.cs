@@ -26,7 +26,7 @@ namespace SpainFootball
                 Console.WriteLine("4. Update team");
                 Console.WriteLine("5. Search team");
                 Console.WriteLine("6. Show high scores");
-                Console.WriteLine("6. Exit");
+                Console.WriteLine("7. Exit");
                 Console.Write("Choose: ");
 
                 string choice = Console.ReadLine();
@@ -71,6 +71,12 @@ namespace SpainFootball
 
             Console.Write("Enter the city: ");
             string city = Console.ReadLine();
+
+            if (teamService.GetByNameAndCity(name, city) != null)
+            {
+                Console.WriteLine("This team already exists. The team was not added.");
+                return;
+            }
 
             Console.Write("Enter the win count: ");
             int winCount = int.Parse(Console.ReadLine());

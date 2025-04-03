@@ -34,6 +34,11 @@ namespace SpainFootball
             _teamRepos.Delete(team);
         }
 
+        public Team GetById(int id)
+        {
+            return _teamRepos.GetById(id);
+        }
+
         public Team GetByName(string name)
         {
             return _teamRepos.GetByName(name);

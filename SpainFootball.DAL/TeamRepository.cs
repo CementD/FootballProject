@@ -33,6 +33,11 @@ namespace SpainFootball.DAL
             _context.SaveChanges();
         }
 
+        public Team GetById(int id)
+        {
+            return _context.Teams.FirstOrDefault(x => x.Id == id);
+        }
+
         public Team GetByName(string name)
         {
             return _context.Teams.FirstOrDefault(x => x.Name == name);
